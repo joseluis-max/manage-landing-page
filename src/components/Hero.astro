@@ -1,0 +1,126 @@
+---
+---
+
+<section class="hero" id="product">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Bring everyone together to build better products.
+      </h1>
+      <p class="hero-description">
+        Manage makes it simple for software teams to plan day-to-day tasks while keeping the larger team goals in view.
+      </p>
+      <button class="btn btn-primary">Get Started</button>
+    </div>
+    
+    <div class="hero-image">
+      <img src="/images/illustration-intro.svg" alt="Charts and graphs illustration" />
+    </div>
+  </div>
+  
+  <div class="bg-pattern"></div>
+</section>
+
+<style lang="scss">
+  @import '../styles/variables';
+  
+  .hero {
+    padding: 3rem 0 6rem;
+    position: relative;
+    overflow: hidden;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+    }
+  }
+  
+  .bg-pattern {
+    position: absolute;
+    top: -10rem;
+    right: -10rem;
+    width: 50rem;
+    height: 50rem;
+    background-image: url('/images/bg-tablet-pattern.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+    
+    @media (max-width: 768px) {
+      top: -5rem;
+      right: -15rem;
+      width: 35rem;
+      height: 35rem;
+    }
+  }
+  
+  .hero-content {
+    @media (max-width: 768px) {
+      order: 2;
+    }
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: $font-weight-bold;
+    color: $color-blue-950;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  .hero-description {
+    color: $color-gray-950;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    line-height: 1.8;
+    
+    @media (max-width: 768px) {
+      margin: 0 auto 2rem;
+    }
+  }
+  
+  .hero-image {
+    @media (max-width: 768px) {
+      order: 1;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 2rem;
+    font-weight: $font-weight-medium;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    
+    &-primary {
+      background-color: $color-orange-400;
+      color: white;
+      box-shadow: 0 10px 20px rgba(242, 95, 58, 0.2);
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,23 @@
+// Primary Colors
+$color-orange-400: hsl(12, 88%, 59%);
+$color-blue-950: hsl(228, 39%, 23%);
+
+// Neutral Colors
+$color-gray-950: hsl(233, 12%, 13%);
+$color-orange-50: hsl(13, 100%, 96%);
+$color-gray-50: hsl(0, 0%, 98%);
+
+// Typography
+$font-family-base: 'Be Vietnam Pro', sans-serif;
+$font-size-base: 16px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Breakpoints
+$breakpoint-mobile: 375px;
+$breakpoint-desktop: 1440px;
+
+// Spacing (optional utility)
+$spacing-unit: 1rem;

@@ -1,0 +1,248 @@
+---
+const testimonials = [
+  {
+    name: 'Anisha Li',
+    avatar: '/images/avatar-anisha.png',
+    quote: '"Manage has supercharged our team\'s workflow. The ability to maintain visibility on larger milestones at all times keeps everyone motivated."'
+  },
+  {
+    name: 'Ali Bravo',
+    avatar: '/images/avatar-ali.png',
+    quote: '"We have been able to cancel so many other subscriptions since using Manage. There is no more cross-channel confusion and everyone is much more focused."'
+  },
+  {
+    name: 'Richard Watts',
+    avatar: '/images/avatar-richard.png',
+    quote: '"Manage allows us to provide structure and process. It keeps us organized and focused. I can\'t stop recommending them to everyone I talk to!"'
+  },
+  {
+    name: 'Shanai Gough',
+    avatar: '/images/avatar-shanai.png',
+    quote: '"Their software allows us to track, manage and collaborate on our projects from anywhere. It keeps the whole team in-sync without being intrusive."'
+  }
+];
+---
+
+<section class="testimonials" id="community">
+  <div class="container">
+    <h2 class="section-title">What they've said</h2>
+  </div>
+  
+  <div class="carousel-wrapper">
+    <div class="testimonials-carousel" id="testimonials-carousel">
+      {testimonials.map((testimonial, index) => (
+        <div class="testimonial-card" id={`testimonial-${index}`}>
+          <img src={testimonial.avatar} alt={testimonial.name} class="testimonial-avatar" />
+          <h3 class="testimonial-name">{testimonial.name}</h3>
+          <p class="testimonial-quote">{testimonial.quote}</p>
+        </div>
+      ))}
+    </div>
+    
+    <div class="carousel-dots">
+      {testimonials.map((_, index) => (
+        <button 
+          class={`dot ${index === 0 ? 'active' : ''}`}
+          aria-label={`Go to slide ${index + 1}`}
+          data-slide={index}
+        ></button>
+      ))}
+    </div>
+  </div>
+  
+  <div class="container">
+    <button class="btn btn-primary">Get Started</button>
+  </div>
+  
+  <div class="bg-pattern"></div>
+</section>
+
+<script>
+  const carousel = document.getElementById('testimonials-carousel');
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+  
+  if (carousel && dots.length > 0) {
+    // Handle dot clicks
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const card = document.getElementById(`testimonial-${index}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    });
+    
+    // Update active dot on scroll
+    const updateActiveDot = () => {
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = carousel.offsetWidth;
+      const activeIndex = Math.round(scrollLeft / cardWidth);
+      
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    };
+    
+    carousel.addEventListener('scroll', updateActiveDot);
+  }
+</script>
+
+<style lang="scss">
+  @import '../styles/variables';
+  
+  .testimonials {
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+  }
+  
+  .bg-pattern {
+    position: absolute;
+    bottom: -10rem;
+    left: -10rem;
+    width: 40rem;
+    height: 40rem;
+    background-image: url('/images/bg-tablet-pattern.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.5;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: $font-weight-bold;
+    color: $color-blue-950;
+    margin-bottom: 4rem;
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
+  
+  .carousel-wrapper {
+    margin-bottom: 3rem;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .testimonials-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 3rem 0 2rem;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    &::before,
+    &::after {
+      content: '';
+      flex: 0 0 calc((100vw - 100% + 3rem) / 2);
+      
+      @media (min-width: 768px) {
+        flex: 0 0 calc((100vw - 55% - 1rem) / 2);
+      }
+    }
+  }
+  
+  .testimonial-card {
+    background-color: $color-gray-50;
+    padding: 4rem 2.5rem 2.5rem;
+    border-radius: 0.5rem;
+    position: relative;
+    flex: 0 0 calc(100% - 3rem);
+    scroll-snap-align: center;
+    min-width: 0;
+    
+    @media (min-width: 768px) {
+      flex: 0 0 calc(55% - 1rem);
+      max-width: 600px;
+    }
+  }
+  
+  .testimonial-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .testimonial-name {
+    font-size: 1.125rem;
+    font-weight: $font-weight-bold;
+    color: $color-blue-950;
+    margin-bottom: 1.25rem;
+  }
+  
+  .testimonial-quote {
+    color: $color-gray-950;
+    opacity: 0.7;
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+  
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    border: 1px solid $color-orange-400;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    padding: 0;
+    
+    &.active {
+      background-color: $color-orange-400;
+    }
+    
+    &:hover {
+      background-color: rgba(242, 95, 58, 0.5);
+    }
+  }
+  
+  .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 2rem;
+    font-weight: $font-weight-medium;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    
+    &-primary {
+      background-color: $color-orange-400;
+      color: white;
+      box-shadow: 0 10px 20px rgba(242, 95, 58, 0.2);
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+</style>
